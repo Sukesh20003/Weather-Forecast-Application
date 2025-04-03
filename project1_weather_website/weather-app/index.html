@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Weather App</title>
+  </head>
+  <body background="https://media.self.com/photos/63925acb8b930311f19583e4/4:3/w_2560%2Cc_limit/AdobeStock_322765984.jpeg">
+
+    <div class="card">
+
+      <div class="divider">
+        <div class="search">
+          <input type="text" placeholder="Enter your city" spellcheck="false" />
+          <button><img src="https://cdn-icons-png.flaticon.com/512/7109/7109313.png" alt=""   
+             height="20px"></button>
+        </div>
+      </div>
+
+        <div class="error"><p>Invalid city name</p></div>
+
+      <div class="wheather">
+        <img class="wheather-icon" src="https://freepngimg.com/thumb/weather/23793-9-weather-photos.png" alt="" height="100px">
+        <h1 class="temp">22°C</h1>
+        <h2 class="city">New York</h2>
+        <div class="details">
+            <div class="col">
+                <img class = "humidity-icon" src="https://cdn-icons-png.flaticon.com/512/8449/8449594.png" alt="" height="100px">
+                <div class="humidity-details">
+                     <span class="h">Humidity</span></span>
+                    <p class="humidity">50%</p>
+                  </div>
+            </div>
+
+            <div class="col">
+              <img class = "wind-icon" src="https://cdn1.iconfinder.com/data/icons/hawcons/32/700211-icon-43-wind-1024.png" alt="" height="100px">
+              <div class="wind-details">
+                <span class="w">Wind speed</span>
+                  <p class="Wind-speed">15km/h</p>
+              </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <script>
+
+const searchBox = document.querySelector(".search input");
+const searchBtn = document.querySelector(".search button");
+
+const apiKey = "1ca32c243a0a499f947f614fa7b1537f";
+const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+
+document.querySelector(".wheather").style.display = "none";
+
+
+async function checkWeather(city) {
+    const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+
+    if (response.status == 404) {
+        document.querySelector(".error").style.display = "block";
+        document.querySelector(".wheather").style.display = "none";
+        return;
+    }else{
+
+    
+    var data = await response.json();
+   /*  console.log(data); */
+
+    document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
+    document.querySelector(".city").innerHTML = data.name;
+    document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+    document.querySelector(".Wind-speed").innerHTML = data.wind.speed + "km/h";
+    document.querySelector(".wheather-icon").src = "https://openweathermap.org/img/wn/" + data.weather[0].icon + ".png";
+
+    if(data.weather[0].main == "Clouds"){
+        document.body.style.backgroundImage = "url('https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')";
+    }
+    else if(data.weather[0].main == "Rain"){
+        document.body.style.backgroundImage = "url('https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')";
+    }
+    else if(data.weather[0].main == "Clear"){
+        document.body.style.backgroundImage = "url('https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')";
+    }
+    else if(data.weather[0].main == "Mist"){
+        document.body.style.backgroundImage = "url('https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')";
+    }
+    else if(data.weather[0].main == "Snow"){
+        document.body.style.backgroundImage = "url('https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')";
+    }
+    else if(data.weather[0].main == "Drizzle"){
+        document.body.style.backgroundImage = "url('https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')";
+    }
+    else if(data.weather[0].main == "Haze"){
+        document.body.style.backgroundImage = "url('https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')";
+    }
+    else if(data.weather[0].main == "Thunderstorm"){
+        document.body.style.backgroundImage = "url('https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')";
+    }
+    else if(data.weather[0].main == "Dust"){
+        document.body.style.backgroundImage = "url('https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')";
+    }
+    else if(data.weather[0].main == "Fog"){
+        document.body.style.backgroundImage = "url('https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')";
+    }
+    else if(data.weather[0].main == "Sand"){
+        document.body.style.backgroundImage = "url('https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')";
+    }
+    else if(data.weather[0].main == "Ash"){
+        document.body.style.backgroundImage = "url('https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')";
+    }
+    else if(data.weather[0].main == "Squall"){
+        document.body.style.backgroundImage = "url('https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')";
+    }
+    else if(data.weather[0].main == "Tornado"){
+        document.body.style.backgroundImage = "url('https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')";
+    }
+    else{
+        document.body.style.backgroundImage = "url('https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')";
+    }
+
+    document.querySelector(".wheather").style.display = "block";
+    document.querySelector(".error").style.display = "none";
+  }
+}
+searchBtn.addEventListener("click", () =>{
+    checkWeather(searchBox.value);
+})
+    checkWeather();
+
+    
+    </script>
+  </body>
+</html>
